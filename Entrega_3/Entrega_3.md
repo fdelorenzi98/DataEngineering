@@ -17,7 +17,7 @@ Los archivos a tener en cuenta son:
 
 # Pasos a seguir:
 
-1. Desde la terminal realizar un 'git clone .
+1. Desde la terminal realizar un 'git clone https://github.com/fdelorenzi98/DataEngineering.git'.
 2. Crear archivo .env con el comando nano.env dentro de la carpeta Entrega_3.
 ```bash
 REDSHIFT_HOST= data-engineer-cluster.cyhh5bfevlmn.us-east-1.redshift.amazonaws.com
