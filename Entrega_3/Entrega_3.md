@@ -18,7 +18,17 @@ Los archivos a tener en cuenta son:
 # Pasos a seguir:
 
 1. Desde la terminal realizar un 'git clone .
-2. Ejecutar el siguiente comando para levantar los servicios de Airflow y Spark.
+2. Crear archivo .env con el comando nano.env dentro de la carpeta Entrega_3.
+```bash
+REDSHIFT_HOST= data-engineer-cluster.cyhh5bfevlmn.us-east-1.redshift.amazonaws.com
+REDSHIFT_PORT=5439
+REDSHIFT_DB=data-engineer-database
+REDSHIFT_USER=franciscodlorenzi_coderhouse
+REDSHIFT_SCHEMA=franciscodlorenzi_coderhouse
+REDSHIFT_PASSWORD=994Iq7Cmn7
+REDSHIFT_URL="jdbc:postgresql://${REDSHIFT_HOST}:${REDSHIFT_PORT}/${REDSHIFT_DB}?user=${REDSHIFT_USER}&password=${REDSH>DRIVER_PATH=/tmp/drivers/postgresql-42.5.2.jar
+```
+3. Ejecutar el siguiente comando para levantar los servicios de Airflow y Spark en el nivel de la carpeta Entrega_3.
 ```bash
 docker-compose up --build
 ```
@@ -44,4 +54,4 @@ docker-compose up --build
 7. En la pestaña `Admin -> Variables` crear una nueva variable con los siguientes datos:
     * Key: `spark_scripts_dir`
     * Value: `/opt/airflow/scripts`
-8. Ejecutar el DAG `etl_users`.
+8. Ejecutar el DAG `etl_tipo_cambio`.
