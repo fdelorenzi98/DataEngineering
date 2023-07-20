@@ -6,14 +6,14 @@ Los archivos a tener en cuenta son:
 * `docker-compose.yml`: Archivo de configuración de Docker Compose. Contiene la configuración de los servicios de Airflow y Spark.
 * `.env`: Archivo de variables de entorno. Contiene variables de conexión a Redshift y driver de Postgres.
 * `dags/`: Carpeta con los archivos de los DAGs.
-    * `etl_users.py`: DAG principal que ejecuta el pipeline de extracción, transformación y carga de datos de usuarios.
+    * `etl_tipo_cambio.py`: DAG principal que ejecuta el pipeline de extracción, transformación y carga de datos de usuarios.
 * `logs/`: Carpeta con los archivos de logs de Airflow.
 * `plugins/`: Carpeta con los plugins de Airflow.
 * `postgres_data/`: Carpeta con los datos de Postgres.
 * `scripts/`: Carpeta con los scripts de Spark.
     * `postgresql-42.5.2.jar`: Driver de Postgres para Spark.
     * `common.py`: Script de Spark con funciones comunes.
-    * `ETL_Users.py`: Script de Spark que ejecuta el ETL.
+    * `ETL_tipo_cambio.py`: Script de Spark que ejecuta el ETL.
 
 # Pasos a seguir:
 
@@ -43,11 +43,11 @@ docker-compose up --build
 6. En la pestaña `Admin -> Connections` crear una nueva conexión con los siguientes datos para Redshift:
     * Conn Id: `redshift_default`
     * Conn Type: `Amazon Redshift`
-    * Host: `host de redshift`
-    * Database: `base de datos de redshift`
-    * Schema: `esquema de redshift`
-    * User: `usuario de redshift`
-    * Password: `contraseña de redshift`
+    * Host: `data-engineer-cluster.cyhh5bfevlmn.us-east-1.redshift.amazonaws.com`
+    * Database: `data-engineer-database`
+    * Schema: `franciscodlorenzi_coderhouse`
+    * User: `franciscodlorenzi_coderhousee`
+    * Password: `994Iq7Cmn7`
     * Port: `5439`
 7. En la pestaña `Admin -> Connections` crear una nueva conexión con los siguientes datos para Spark:
     * Conn Id: `spark_default`
