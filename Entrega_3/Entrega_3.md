@@ -30,7 +30,10 @@ REDSHIFT_URL='jdbc:postgresql://${REDSHIFT_HOST}:${REDSHIFT_PORT}/${REDSHIFT_DB}
 ```
 3. Crear las siguientes carpetas a la misma altura del `docker-compose.yml`.
 ```bash
-mkdir -p dags,logs,plugins,postgres_data,scripts
+mkdir -p logs
+mkdir -p plugins
+mkdir -p postgres_data
+mkdir -p scripts
 ```
 4. Ejecutar el siguiente comando para levantar los servicios de Airflow y Spark en el nivel de la carpeta Entrega_3.
 ```bash
