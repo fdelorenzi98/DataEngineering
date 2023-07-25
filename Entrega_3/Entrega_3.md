@@ -30,17 +30,18 @@ REDSHIFT_URL='jdbc:postgresql://${REDSHIFT_HOST}:${REDSHIFT_PORT}/${REDSHIFT_DB}
 ```
 3. Crear las siguientes carpetas a la misma altura del `docker-compose.yml`.
 ```bash
-mkdir -p logs
-mkdir -p plugins
-mkdir -p postgres_data
-mkdir -p scripts
+mkdir -p ./logs ./plugins ./postgres_data
 ```
-4. Ejecutar el siguiente comando para levantar los servicios de Airflow y Spark en el nivel de la carpeta Entrega_3.
+4. Ejecutar el siguiente comando en el contexto de la carpeta Entrega_3 para dar los permisos necesarios, si se ejecuta desde Linux o IOS.
+```bash
+echo -e "AIRFLOW_UID=$(id -u)\nAIRFLOW_GID=0" > .env
+```
+5. Ejecutar el siguiente comando para levantar los servicios de Airflow y Spark en el nivel de la carpeta Entrega_3.
 ```bash
 docker-compose up --build
 ```
-5. Una vez que los servicios estén levantados, ingresar a Airflow en `http://localhost:8080/`.
-6. En la pestaña `Admin -> Connections` crear una nueva conexión con los siguientes datos para Redshift:
+6. Una vez que los servicios estén levantados, ingresar a Airflow en `http://localhost:8080/`.
+7. En la pestaña `Admin -> Connections` crear una nueva conexión con los siguientes datos para Redshift:
     * Conn Id: `redshift_default`
     * Conn Type: `Amazon Redshift`
     * Host: `data-engineer-cluster.cyhh5bfevlmn.us-east-1.redshift.amazonaws.com`
@@ -49,16 +50,16 @@ docker-compose up --build
     * User: `franciscodlorenzi_coderhousee`
     * Password: `994Iq7Cmn7`
     * Port: `5439`
-7. En la pestaña `Admin -> Connections` crear una nueva conexión con los siguientes datos para Spark:
+8. En la pestaña `Admin -> Connections` crear una nueva conexión con los siguientes datos para Spark:
     * Conn Id: `spark_default`
     * Conn Type: `Spark`
     * Host: `spark://spark`
     * Port: `7077`
     * Extra: `{"queue": "default"}`
-8. En la pestaña `Admin -> Variables` crear una nueva variable con los siguientes datos:
+9. En la pestaña `Admin -> Variables` crear una nueva variable con los siguientes datos:
     * Key: `driver_class_path`
     * Value: `/tmp/drivers/postgresql-42.5.2.jar`
-9. En la pestaña `Admin -> Variables` crear una nueva variable con los siguientes datos:
+10. En la pestaña `Admin -> Variables` crear una nueva variable con los siguientes datos:
     * Key: `spark_scripts_dir`
     * Value: `/opt/airflow/scripts`
-10. Ejecutar el DAG `etl_tipo_cambio`.
+11. Ejecutar el DAG `etl_tipo_cambio`.
