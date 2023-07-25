@@ -27,14 +27,18 @@ REDSHIFT_USER=franciscodlorenzi_coderhouse
 REDSHIFT_SCHEMA=franciscodlorenzi_coderhouse
 REDSHIFT_PASSWORD=994Iq7Cmn7
 REDSHIFT_URL='jdbc:postgresql://${REDSHIFT_HOST}:${REDSHIFT_PORT}/${REDSHIFT_DB}?user=${REDSHIFT_USER}&password=${REDSH>DRIVER_PATH=/tmp/drivers/postgresql-42.5.2.jar'
+
+AIRFLOW_UID=501
+AIRFLOW_GID=0
 ```
 3. Crear las siguientes carpetas a la misma altura del `docker-compose.yml`.
 ```bash
 mkdir -p ./logs ./plugins ./postgres_data
 ```
-4. Ejecutar el siguiente comando en el contexto de la carpeta Entrega_3 para dar los permisos necesarios, si se ejecuta desde Linux o IOS.
+4. Ejecutar el siguiente comando en el contexto de la carpeta Entrega_3.
 ```bash
-echo -e "AIRFLOW_UID=$(id -u)\nAIRFLOW_GID=0" > .env
+docker pull lucastrubiano/airflow:airflow_2_6_2
+docker pull lucastrubiano/spark:spark_3_4_1
 ```
 5. Ejecutar el siguiente comando para levantar los servicios de Airflow y Spark en el nivel de la carpeta Entrega_3.
 ```bash
