@@ -6,4 +6,4 @@ RUN mkdir -p /home/spark/working_dir
 
 USER 1001
 
-# docker build -t franciscodlorenzi_coderhouse/spark:spark_3_4_1
+# docker build -t spark_3_4_1
