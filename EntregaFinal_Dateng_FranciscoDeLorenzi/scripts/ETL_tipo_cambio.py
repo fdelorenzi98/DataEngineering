@@ -14,7 +14,7 @@ class ETL_tipo_cambio(ETL_Spark):
         self.process_date = datetime.now().strftime("%Y-%m-%d")
 
     def run(self):
-        process_date = "2023-07-20"  # datetime.now().strftime("%Y-%m-%d")
+        process_date = self.process_date
         self.execute(process_date)
 
     def extract(self):
