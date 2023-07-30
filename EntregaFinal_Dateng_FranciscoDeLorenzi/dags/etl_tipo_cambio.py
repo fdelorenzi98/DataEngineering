@@ -37,7 +37,6 @@ def get_process_date(**kwargs):
         )
     kwargs["ti"].xcom_push(key="process_date", value=process_date)
 
-
 defaul_args = {
     "owner": "Francisco De Lorenzi",
     "start_date": datetime(2023, 7, 20),
@@ -68,6 +67,13 @@ with DAG(
         task_id="create_table",
         conn_id="redshift_default",
         sql=QUERY_CREATE_TABLE,
+        dag=dag,
+    )
+
+    clean_process_date = SQLExecuteQueryOperator(
+        task_id="clean_process_date",
+        conn_id="redshift_default",
+        sql=QUERY_CLEAN_PROCESS_DATE,
         dag=dag,
     )
 

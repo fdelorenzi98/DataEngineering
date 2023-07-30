@@ -80,6 +80,12 @@ class ETL_Spark:
         """
         print(">>> [E] Extrayendo datos de la API...")
 
+    def send(self, aumento_porcentual_hoy):
+        """
+        Extrae datos de la API
+        """
+        print(">>> [E] Envío de mail...")
+
     def load(self, df):
         """
         Carga los datos transformados en Redshift

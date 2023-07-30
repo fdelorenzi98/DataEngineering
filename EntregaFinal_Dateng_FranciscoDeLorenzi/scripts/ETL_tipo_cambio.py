@@ -1,6 +1,5 @@
 # Este script se desarrolla en Spark y realiza el proceso de ETL de la tabla tipo_cambio
 
-import requests
 from os import environ as env
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, expr, pct_change
@@ -9,6 +8,9 @@ from pyspark.sql.functions import concat, col, lit, when, expr, to_date
 from commons import ETL_Spark
 from datetime import datetime
 from pyspark.sql.window import Window
+from airflow.models import Variable
+import smtplib
+import requests
 
 class ETL_tipo_cambio(ETL_Spark):
     def __init__(self, job_name=None):
@@ -54,8 +56,34 @@ class ETL_tipo_cambio(ETL_Spark):
             # Calcular el aumento porcentual diario del tipo de cambio
             df = df.withColumn("aumento_porcentual", pct_change("cambio").over(Window.orderBy("fecha")) * 100)
 
+            # Obtener el aumento porcentual del día de hoy
+            today_aumento_porcentual = df.filter(df["fecha"] == expr("current_date()")).select("aumento_porcentual").collect()
+
+            # Verificar si el aumento porcentual del día de hoy supera el 1%
+            if today_aumento_porcentual and today_aumento_porcentual[0]["aumento_porcentual"] > 1:
+                aumento_porcentual_hoy = today_aumento_porcentual[0]["aumento_porcentual"]
+            else:
+                aumento_porcentual_hoy = None
+            
+            return df, aumento_porcentual_hoy
+        
         else:
             print('Error en la solicitud:', response.status_code, '. No se procedió a la carga de datos en Redshift.')
+
+    def send(self, aumento_porcentual_hoy):
+        try:
+            x=smtplib.SMTP('smtp.gmail.com',587)
+            x.starttls()
+            x.login(Variable.get('SMTP_EMAIL_FROM'),Variable.get('SMTP_PASSWORD'))
+            subject='Movimiento atípico del tipo de cambio'
+            body_text=aumento_porcentual_hoy
+            message='La variación del tipo de cambio superó el umbral de advertencia definido. La variación es de {}'.format(body_text)
+            x.sendmail(Variable.get('SMTP_EMAIL_FROM'), Variable.get('SMTP_EMAIL_TO'), message)
+            print('Exito')
+        except:
+            print(Exception)
+            print('Error')
+            raise Exception
 
     def load(self, df):
         """

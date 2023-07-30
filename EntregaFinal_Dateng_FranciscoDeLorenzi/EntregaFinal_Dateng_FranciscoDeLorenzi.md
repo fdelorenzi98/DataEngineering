@@ -69,4 +69,11 @@ smtp_password = "CONTRASEÑA"
 
 ```
     El "CORREO" debe ser desde el cual deseo enviar mails, por ejemplo nuestro correo personal. Y por otro lado la "CONTRASEÑA" no es aquella que usamos para autenticarnos en el mail, sino que desde la gestión de nuestra cuenta, debemos crear una contraseña para aplicaciones, y usar el código que nos devuelven esa configuración.
-11. Ejecutar el DAG `etl_tipo_cambio`.
+11. Desde la interfaz web de Airflow, generar las variables:
+```bash
+SMTP_EMAIL_FROM = "CORREO"
+SMTP_EMAIL_TO = "CORREO"
+SMTP_PASSWORD = "CONTRASEÑA"
+
+```
+12. Ejecutar el DAG `etl_tipo_cambio`.
