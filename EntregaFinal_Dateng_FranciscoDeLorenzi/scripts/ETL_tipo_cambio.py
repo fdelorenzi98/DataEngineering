@@ -71,19 +71,20 @@ class ETL_tipo_cambio(ETL_Spark):
             print('Error en la solicitud:', response.status_code, '. No se procedió a la carga de datos en Redshift.')
 
     def send(self, aumento_porcentual_hoy):
-        try:
-            x=smtplib.SMTP('smtp.gmail.com',587)
-            x.starttls()
-            x.login(Variable.get('SMTP_EMAIL_FROM'),Variable.get('SMTP_PASSWORD'))
-            subject='Movimiento atípico del tipo de cambio'
-            body_text=aumento_porcentual_hoy
-            message='La variación del tipo de cambio superó el umbral de advertencia definido. La variación es de {}'.format(body_text)
-            x.sendmail(Variable.get('SMTP_EMAIL_FROM'), Variable.get('SMTP_EMAIL_TO'), message)
-            print('Exito')
-        except:
-            print(Exception)
-            print('Error')
-            raise Exception
+        if aumento_porcentual_hoy != None:
+            try:
+                x=smtplib.SMTP('smtp.gmail.com',587)
+                x.starttls()
+                x.login(Variable.get('SMTP_EMAIL_FROM'),Variable.get('SMTP_PASSWORD'))
+                subject='Movimiento atípico del tipo de cambio'
+                body_text=aumento_porcentual_hoy
+                message='La variación del tipo de cambio superó el umbral de advertencia definido. La variación es de {}'.format(body_text)
+                x.sendmail(Variable.get('SMTP_EMAIL_FROM'), Variable.get('SMTP_EMAIL_TO'), message)
+                print('Exito')
+            except:
+                print(Exception)
+                print('Error')
+                raise Exception
 
     def load(self, df):
         """
