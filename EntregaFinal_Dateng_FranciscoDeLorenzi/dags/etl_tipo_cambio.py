@@ -44,6 +44,9 @@ defaul_args = {
     "retries": 0,
     "retry_delay": timedelta(seconds=5),
     "catchup": False,
+    "email": ["franciscodlorenzi@gmail.com"],
+    "email_on_failure": True,
+    "email_on_retry": False,
 }
 
 with DAG(
