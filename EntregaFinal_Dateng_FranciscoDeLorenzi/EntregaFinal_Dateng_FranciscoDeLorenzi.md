@@ -62,4 +62,11 @@ docker-compose up --build
 9. En la pestaña `Admin -> Variables` crear una nueva variable con los siguientes datos:
     * Key: `spark_scripts_dir`
     * Value: `/opt/airflow/scripts`
-10. Ejecutar el DAG `etl_tipo_cambio`.
+10. Una vez corrido el docker-compose up --build, se creará una carpete .config en el contenedor. Ingresar a dicha carpeta y más esepecíficamente al archivo airflow.cfg. Buscar la sección [SMTP] para configurar el protocolo de envío de mails ante fallo. 
+```bash
+smtp_user = "CORREO"
+smtp_password = "CONTRASEÑA"
+
+```
+El "CORREO" debe ser desde el cual deseo enviar mails, por ejemplo nuestro correo personal. Y por otro lado la "CONTRASEÑA" no es aquella que usamos para autenticarnos en el mail, sino que desde la gestión de nuestra cuenta, debemos crear una contraseña para aplicaciones, y usar el código que nos devuelven esa configuración.
+11. Ejecutar el DAG `etl_tipo_cambio`.
