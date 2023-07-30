@@ -27,6 +27,7 @@ REDSHIFT_USER=franciscodlorenzi_coderhouse
 REDSHIFT_SCHEMA=franciscodlorenzi_coderhouse
 REDSHIFT_PASSWORD=994Iq7Cmn7
 REDSHIFT_URL='jdbc:postgresql://${REDSHIFT_HOST}:${REDSHIFT_PORT}/${REDSHIFT_DB}?user=${REDSHIFT_USER}&password=${REDSH>DRIVER_PATH=/tmp/drivers/postgresql-42.5.2.jar'
+DRIVER_PATH=/tmp/drivers/postgresql-42.5.2.jar
 
 AIRFLOW_UID=501
 AIRFLOW_GID=0
