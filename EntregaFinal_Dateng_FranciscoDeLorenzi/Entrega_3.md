@@ -1,4 +1,4 @@
-# Entrega_3
+# EntregaFinal
 
 # Distribución de los archivos
 Los archivos a tener en cuenta son:
@@ -18,7 +18,7 @@ Los archivos a tener en cuenta son:
 # Pasos a seguir:
 
 1. Desde la terminal realizar un 'git clone https://github.com/fdelorenzi98/DataEngineering.git'.
-2. Crear archivo .env con el comando nano.env dentro de la carpeta Entrega_3.
+2. Crear archivo .env con el comando nano.env dentro de la carpeta EntregaFinal_Dateng_FranciscoDeLorenzi.
 ```bash
 REDSHIFT_HOST= data-engineer-cluster.cyhh5bfevlmn.us-east-1.redshift.amazonaws.com
 REDSHIFT_PORT=5439
@@ -36,7 +36,7 @@ AIRFLOW_GID=0
 ```bash
 mkdir -p ./logs ./plugins ./postgres_data
 ```
-4. Ejecutar el siguiente comando para levantar los servicios de Airflow y Spark en el nivel de la carpeta Entrega_3.
+4. Ejecutar el siguiente comando para levantar los servicios de Airflow y Spark en el nivel de la carpeta EntregaFinal_Dateng_FranciscoDeLorenzi.
 ```bash
 docker-compose up --build
 ```
