@@ -80,3 +80,4 @@ if __name__ == "__main__":
     print("Corriendo script")
     etl = ETL_tipo_cambio()
     etl.run()
+    

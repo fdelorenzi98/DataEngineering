@@ -87,3 +87,4 @@ with DAG(
     )
 
     get_process_date_task >> create_table >> clean_process_date >> spark_etl_tipo_cambio
+    

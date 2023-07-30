@@ -85,3 +85,4 @@ class ETL_Spark:
         Carga los datos transformados en Redshift
         """
         print(">>> [L] Cargando datos en Redshift...")
+        
