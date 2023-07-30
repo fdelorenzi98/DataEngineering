@@ -76,4 +76,5 @@ SMTP_EMAIL_TO = "CORREO"
 SMTP_PASSWORD = "CONTRASEÑA"
 
 ```
+    El "CORREO" debe ser desde el cual deseo enviar mails, por ejemplo nuestro correo personal. El segundo "CORREO" debe ser hacia el cual deseo enviar mails. Y por otro lado la "CONTRASEÑA" no es aquella que usamos para autenticarnos en el mail personal, sino que desde la gestión de nuestra cuenta, debemos crear una contraseña para aplicaciones, y usar el código que nos devuelven esa configuración.
 12. Ejecutar el DAG `etl_tipo_cambio`.
