@@ -72,7 +72,7 @@ class ETL_Spark:
         df = self.extract()
 
         # Cargamos los datos en Redshift
-        self.load(df, auxi)
+        self.load(df)
 
     def extract(self):
         """

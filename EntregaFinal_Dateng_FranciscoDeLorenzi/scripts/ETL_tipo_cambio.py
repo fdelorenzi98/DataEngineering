@@ -7,6 +7,8 @@ from pyspark.sql.functions import col, expr, pct_change
 from pyspark.sql.types import DoubleType, DateType
 from pyspark.sql.functions import concat, col, lit, when, expr, to_date
 from commons import ETL_Spark
+from datetime import datetime
+from pyspark.sql.window import Window
 
 class ETL_tipo_cambio(ETL_Spark):
     def __init__(self, job_name=None):
