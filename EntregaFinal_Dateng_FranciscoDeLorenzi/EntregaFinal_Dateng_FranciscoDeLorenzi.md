@@ -15,7 +15,7 @@ Los archivos a tener en cuenta son:
     * `common.py`: Script de Spark con funciones comunes.
     * `ETL_Users.py`: Script de Spark que ejecuta el ETL.
 
-# Pasos a seguir:
+# Pasos a seguir :
 
 1. Desde la terminal realizar un 'git clone https://github.com/fdelorenzi98/DataEngineering.git'.
 2. Crear archivo .env con el comando nano.env dentro de la carpeta EntregaFinal_Dateng_FranciscoDeLorenzi.
