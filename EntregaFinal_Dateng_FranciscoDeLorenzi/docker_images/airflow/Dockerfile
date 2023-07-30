@@ -2,6 +2,7 @@ FROM apache/airflow:2.6.2
 
 RUN python -m pip install --upgrade pip
 RUN python -m pip install apache-airflow-providers-apache-spark
+RUN python -m pip install requests
 
 USER root
 
@@ -25,4 +26,4 @@ RUN pip install -r /requirements.txt
 # RUN python -m pip install 'apache-airflow[amazon]'
 # RUN python -m pip install apache-airflow-providers-amazon
 
-# docker build -t lucastrubiano/airflow:airflow_2_6_2
+# docker build -t franciscodlorenzi_coderhouse/airflow:airflow_2_6_2
