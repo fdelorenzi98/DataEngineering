@@ -1,7 +1,7 @@
 # Este es el DAG que orquesta el ETL de la tabla tipo_cambio
 
 from airflow import DAG
-from airflow.operators.python_operator import PythonOperator
+from airflow.operators.python import PythonOperator
 from airflow.providers.apache.spark.operators.spark_submit import SparkSubmitOperator
 from airflow.providers.common.sql.operators.sql import SQLExecuteQueryOperator
 from airflow.models import Variable
