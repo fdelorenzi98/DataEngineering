@@ -36,7 +36,7 @@ AIRFLOW_GID=0
 ```bash
 mkdir -p ./logs ./plugins ./postgres_data
 ```
-4. Ejecutar el siguiente comando para levantar los servicios de Airflow y Spark en el nivel de la carpeta EntregaFinal_Dateng_FranciscoDeLorenzi.
+4. Ejecutar el siguiente comando para levantar los servicios de Airflow y Spark en el nivel de la carpeta EntregaFinal_Dateng_FranciscoDeLorenzi. Previo a esto puede ser necesario crear las imagenes de 'airflow' y de 'spark' según se indica en cada archivo 'Dockerfile' dentro de la carpeta 'docker_images'.
 ```bash
 docker-compose up --build
 ```
@@ -74,7 +74,6 @@ smtp_password = "CONTRASEÑA"
 SMTP_EMAIL_FROM = "CORREO"
 SMTP_EMAIL_TO = "CORREO"
 SMTP_PASSWORD = "CONTRASEÑA"
-
 ```
     El "CORREO" debe ser desde el cual deseo enviar mails, por ejemplo nuestro correo personal. El segundo "CORREO" debe ser hacia el cual deseo enviar mails. Y por otro lado la "CONTRASEÑA" no es aquella que usamos para autenticarnos en el mail personal, sino que desde la gestión de nuestra cuenta, debemos crear una contraseña para aplicaciones, y usar el código que nos devuelven esa configuración.
 12. Se definieron umbrales para ejecutar el envío de mails cuando se supera cierto aumento porcentual diario en el tipo de cambio. Estos límites se deben configurar desde el archivo 'config.json' dentro de la carpeta 'scripts, desde el cual se indica cual es el umbral de advertencia, el intermedio y el crítico. Esto permite modificar dichos valores sin tocar el código fuente.
