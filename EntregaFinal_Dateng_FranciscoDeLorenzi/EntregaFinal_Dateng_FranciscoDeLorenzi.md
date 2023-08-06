@@ -13,6 +13,7 @@ Los archivos a tener en cuenta son:
 * `scripts/`: Carpeta con los scripts de Spark.
     * `postgresql-42.5.2.jar`: Driver de Postgres para Spark.
     * `common.py`: Script de Spark con funciones comunes.
+    * `config.json`: Archivo en formato JSON de configuración de umbrales.
     * `ETL_Users.py`: Script de Spark que ejecuta el ETL.
 
 # Pasos a seguir :
