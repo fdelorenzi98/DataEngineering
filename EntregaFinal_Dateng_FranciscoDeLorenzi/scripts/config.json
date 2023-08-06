@@ -1,0 +1,7 @@
+{
+  "thresholds": {
+    "1": "La variación del tipo de cambio superó el umbral de advertencia definido (1%). La variación es de {}",
+    "2": "La variación del tipo de cambio superó un umbral intermedio (2%). La variación es de {}",
+    "3": "La variación del tipo de cambio superó el umbral crítico (3%). La variación es de {}"
+  }
+}

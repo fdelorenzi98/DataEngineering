@@ -11,6 +11,7 @@ from pyspark.sql.window import Window
 from airflow.models import Variable
 import smtplib
 import requests
+import json
 
 class ETL_tipo_cambio(ETL_Spark):
     def __init__(self, job_name=None):
@@ -59,32 +60,50 @@ class ETL_tipo_cambio(ETL_Spark):
             # Obtener el aumento porcentual del día de hoy
             today_aumento_porcentual = df.filter(df["fecha"] == expr("current_date()")).select("aumento_porcentual").collect()
 
-            # Verificar si el aumento porcentual del día de hoy supera el 1%
-            if today_aumento_porcentual and today_aumento_porcentual[0]["aumento_porcentual"] > 1:
+            # Cargar el archivo de configuración con los thresholds
+            with open('config.json', 'r') as config_file:
+                config = json.load(config_file)
+            thresholds = config["thresholds"]
+
+            # Verificar si el aumento porcentual del día de hoy supera el primer threshold
+            if today_aumento_porcentual and today_aumento_porcentual[0]["aumento_porcentual"] > float(list(thresholds.keys())[0]):
                 aumento_porcentual_hoy = today_aumento_porcentual[0]["aumento_porcentual"]
             else:
                 aumento_porcentual_hoy = None
-            
+
             return df, aumento_porcentual_hoy
         
         else:
             print('Error en la solicitud:', response.status_code, '. No se procedió a la carga de datos en Redshift.')
 
     def send(self, aumento_porcentual_hoy):
-        if aumento_porcentual_hoy != None:
-            try:
-                x=smtplib.SMTP('smtp.gmail.com',587)
+        try:
+            # Carga los umbrales y mensajes desde el archivo de configuración
+            with open('config.json', 'r') as config_file:
+                config = json.load(config_file)
+            thresholds = config["thresholds"]
+
+            if aumento_porcentual_hoy is not None:
+                x = smtplib.SMTP('smtp.gmail.com', 587)
                 x.starttls()
-                x.login(Variable.get('SMTP_EMAIL_FROM'),Variable.get('SMTP_PASSWORD'))
-                subject='Movimiento atípico del tipo de cambio'
-                body_text=aumento_porcentual_hoy
-                message='La variación del tipo de cambio superó el umbral de advertencia definido. La variación es de {}'.format(body_text)
-                x.sendmail(Variable.get('SMTP_EMAIL_FROM'), Variable.get('SMTP_EMAIL_TO'), message)
-                print('Exito')
-            except:
-                print(Exception)
-                print('Error')
-                raise Exception
+                x.login(Variable.get('SMTP_EMAIL_FROM'), Variable.get('SMTP_PASSWORD'))
+
+                # Recorre el diccionario de umbrales para verificar si el aumento porcentual supera alguno de ellos
+                for threshold, message_template in thresholds.items():
+                    if aumento_porcentual_hoy > float(threshold):
+                        subject = 'Movimiento atípico del tipo de cambio'
+                        body_text = aumento_porcentual_hoy
+                        message = message_template.format(body_text)
+                        x.sendmail(Variable.get('SMTP_EMAIL_FROM'), Variable.get('SMTP_EMAIL_TO'), message)
+                        print('Exito')
+                        break  # Detiene el bucle si ya se envió un correo
+
+                x.quit()
+
+        except Exception as e:
+            print(e)
+            print('Error')
+            raise Exception
 
     def load(self, df):
         """
