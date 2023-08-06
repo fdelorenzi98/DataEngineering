@@ -77,4 +77,5 @@ SMTP_PASSWORD = "CONTRASEÑA"
 
 ```
     El "CORREO" debe ser desde el cual deseo enviar mails, por ejemplo nuestro correo personal. El segundo "CORREO" debe ser hacia el cual deseo enviar mails. Y por otro lado la "CONTRASEÑA" no es aquella que usamos para autenticarnos en el mail personal, sino que desde la gestión de nuestra cuenta, debemos crear una contraseña para aplicaciones, y usar el código que nos devuelven esa configuración.
-12. Ejecutar el DAG `etl_tipo_cambio`.
+12. Se definieron umbrales para ejecutar el envío de mails cuando se supera cierto aumento porcentual diario en el tipo de cambio. Estos límites se deben configurar desde el archivo 'config.json', desde el cual se indica cual es el umbral de advertencia, el intermedio y el crítico. Esto permite modificar dichos valores sin tocar el código fuente.
+13. Ejecutar el DAG `etl_tipo_cambio`.
